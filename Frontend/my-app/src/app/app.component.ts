@@ -8,9 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'my-app';
-  private data: any = [];
+  public data: any = [];
   constructor(private http: HttpClient) {
-
   }
 
   getData(){
