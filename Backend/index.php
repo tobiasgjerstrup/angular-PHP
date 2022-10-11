@@ -8,9 +8,16 @@ parse_str($_SERVER['QUERY_STRING'], $queries);
 
 switch ($queries['ID']) {
     case 'JSON':
-        $array = array("test" => 1, "test2" => 2, "test3" => 2, "test4" => 2, "test5" => 2, "test6" => 2, "test7" => 2, "test8" => 2);
+        $array = array();
+        // $array = array("title" => "Temp Title", "description" => "This is a description this is another line", "test3" => 2, "test4" => 2, "test5" => 2, "test6" => 2, "test7" => 2, "test8" => 2);
+        $array['title'] = "Temp Title";
+        $array['description'] = array();
+        $descriptionLines = array("line1", "line2", "line3");
+        foreach ($descriptionLines as $descriptionLine) {
+            array_push($array['description'], $descriptionLine);
+        }
         $json = json_encode($array);
-        echo($json);
+        echo ($json);
         break;
     default:
         echo ("Invalid ID");

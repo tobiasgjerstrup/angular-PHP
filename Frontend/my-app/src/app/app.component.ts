@@ -11,7 +11,7 @@ export class AppComponent {
   public data: any = [];
   constructor(private http: HttpClient) {
   }
-
+  test = this.getData();
   getData(){
     const url ='http://localhost:8000/?ID=JSON'
     this.http.get(url).subscribe((res)=>{
