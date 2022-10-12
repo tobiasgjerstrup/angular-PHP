@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { ItemListComponent } from './item-list/item-list.component'
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ItemListComponent } from './item-list/item-list.component'
     HttpClientModule,
     NgbModule,
     BrowserAnimationsModule,
-    MatInputModule
+    MatInputModule,
+    FormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
