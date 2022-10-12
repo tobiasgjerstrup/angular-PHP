@@ -18,5 +18,12 @@ export class AppComponent {
       this.data = res
       console.log(this.data)
     })
+    this.putData();
+  }
+  putData(){
+    const url ='http://localhost:8000/?ID=PUT'
+    this.http.put(url, "this is a test").subscribe((res)=>{
+      this.data = res
+    })
   }
 }

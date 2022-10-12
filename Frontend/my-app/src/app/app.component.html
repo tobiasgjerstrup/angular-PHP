@@ -1,10 +1,15 @@
-<div style="text-align:center">
-  <h1>
-    Welcome!
-  </h1>
+<app-item-list></app-item-list>
+
+<div style="text-align: center">
+  <h1>Welcome!</h1>
   <button (click)="getData()">Fetch Data</button>
-  <div style="background-color: gray;">
-    <p>{{data.title}}</p>
-    <p *ngFor="let description of data.description">{{description}}</p>
+  <div *ngFor="let dataPoint of data.data" class="row content">
+    <div class="col-6">
+      <p>{{ dataPoint.title }}</p>
+      <img src={{dataPoint.image}} alt="test">
+    </div>
+    <div class="col-6">
+      <p *ngFor="let description of dataPoint.description">{{ description }}</p>
+    </div>
   </div>
 </div>
