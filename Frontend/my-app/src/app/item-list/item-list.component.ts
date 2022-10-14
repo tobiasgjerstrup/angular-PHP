@@ -7,36 +7,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./item-list.component.scss']
 })
 export class ItemListComponent implements OnInit {
+  url = 'http://192.168.8.117/';
   value = '';
   public data: any = [];
   constructor(private http: HttpClient) {
   }
   getData(){
-    const url ='http://localhost:8000/?ID=JSON'
-    this.http.get(url).subscribe((res)=>{
-      this.data = res
-      console.log(this.data)
+    this.http.get(this.url+'?ID=JSON').subscribe((res)=>{
+      this.data = res;
     })
   } 
   ngOnInit(): void {
     this.getData();
   }
   putData(){
-    const url ='http://localhost:8000/?ID=PUT'
-    this.http.put(url, this.value).subscribe((res)=>{
+    this.http.put(this.url+'?ID=PUT', this.value).subscribe((res)=>{
       this.getData();
     })
   }
   removeData(i: any){
-    const url ='http://localhost:8000/?ID=REMOVE'
-    this.http.put(url, i).subscribe((res)=>{
+    this.http.put(this.url+'?ID=REMOVE', i).subscribe((res)=>{
       this.getData();
     })
   }
   createData(i: any){
     console.log(i)
-    const url ='http://localhost:8000/?ID=CREATE'
-    this.http.put(url, i).subscribe((res)=>{
+    this.http.put(this.url+'?ID=CREATE', i).subscribe((res)=>{
       this.getData();
     })
   }

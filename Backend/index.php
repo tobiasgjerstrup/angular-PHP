@@ -49,7 +49,7 @@ switch ($queries['ID']) {
                 'line 2',
                 'line 3'
             ),
-            'image' => "http://localhost:8000/assets/img/person-icon.png"
+            'image' => "assets/img/person-icon.png"
         );
         array_push($json['data'], $data);
         $json = json_encode($json);
@@ -57,7 +57,6 @@ switch ($queries['ID']) {
         fwrite($fp, $json);
         fclose($fp);
         print_r($json);
-        fclose($putdata);
         break;
     default:
         echo ("Invalid ID");
