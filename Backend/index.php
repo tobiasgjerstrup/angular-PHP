@@ -3,7 +3,7 @@ header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: HEAD, GET, POST, PUT, PATCH, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method,Access-Control-Request-Headers, Authorization");
 header("HTTP/1.1 200 OK");
-ini_set('display_errors', 'Off');
+// ini_set('display_errors', 'Off');
 $queries = array();
 parse_str($_SERVER['QUERY_STRING'], $queries);
 switch ($queries['ID']) {
@@ -14,15 +14,17 @@ switch ($queries['ID']) {
         print_r($json);
         break;
     case 'PUT':
-        $putdata = fopen("php://input", "r");
+        $putdata = explode(",",fread(fopen("php://input", "r"), 1024));
         $json = file_get_contents("./assets/json/1.json");
         $json = json_decode($json);
-        $json->data[0]->title = fread($putdata, 1024);
+        $putdata[2] = str_replace('\n','<br>',$putdata[2]);
+        $json->data[$putdata[0]]->title = $putdata[1];
+        $json->data[$putdata[0]]->description = $putdata[2];
+        $json->data[$putdata[0]]->image = $putdata[3];
         $json = json_encode($json);
         $fp = fopen("./assets/json/1.json", "w");
         fwrite($fp, $json);
         fclose($fp);
-        fclose($putdata);
         break;
     case 'REMOVE':
         $putdata = fopen("php://input", "r");
@@ -44,12 +46,8 @@ switch ($queries['ID']) {
         $json = json_decode($json, true);
         $data = array(
             'title' => $putdata,
-            "description" => array(
-                'line 1',
-                'line 2',
-                'line 3'
-            ),
-            'image' => "assets/img/person-icon.png"
+            "description" => 'this is description',
+            'image' => "assets/img/php.png"
         );
         array_push($json['data'], $data);
         $json = json_encode($json);

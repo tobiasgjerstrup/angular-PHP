@@ -1,23 +1,41 @@
 <mat-form-field class="example-form-field" appearance="fill">
-  <mat-label>Clearable input</mat-label>
+  <mat-label>Title</mat-label>
   <input matInput type="text" [(ngModel)]="value" (keyup.enter)="createData(value)">
-    <mat-icon matSuffix *ngIf="value" (click)="value=''">close</mat-icon>
+  <mat-icon matSuffix *ngIf="value" (click)="value=''">close</mat-icon>
 </mat-form-field>
 
 <div style="text-align: center">
   <h1>Welcome!</h1>
   <button (click)="getData()">Fetch Data</button>
-  <mat-icon matSuffix (click)="createData(value)">close</mat-icon>
 </div>
 <div *ngFor="let dataPoint of data.data; let i = index" class="row content">
   <div class="col-6">
-    <p>{{ dataPoint.title }}</p>
-    <img style="height: 32px; width: 32px;"src={{url}}{{dataPoint.image}} alt="test">
+    <p *ngIf="edit !== i">{{ dataPoint.title }}</p>
+    <mat-form-field *ngIf="edit === i" class="example-form-field" appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput type="text" [(ngModel)]="titleValue">
+      <mat-icon matSuffix *ngIf="titleValue" (click)="titleValue=''">close</mat-icon>
+    </mat-form-field>
+    <mat-form-field *ngIf="edit === i" class="example-form-field" appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput type="text" [(ngModel)]="imageValue">
+      <mat-icon matSuffix *ngIf="imageValue" (click)="imageValue=''">close</mat-icon>
+    </mat-form-field>
+    <img *ngIf="edit !== i" style="height: 32px; width: 32px;" src={{url}}{{dataPoint.image}} alt="test">
   </div>
   <div class="col-5">
-    <p *ngFor="let description of dataPoint.description">{{ description }}</p>
+    <!-- <ng-container *ngFor="let description of dataPoint.description"> -->
+      <p *ngIf="edit !== i" style="white-space: pre-line;">{{ dataPoint.description }}</p>
+      <mat-form-field *ngIf="edit === i" class="example-form-field" appearance="fill">
+        <mat-label>description</mat-label>
+        <textarea matInput type="text" [(ngModel)]="descriptionValue"></textarea>
+        <mat-icon matSuffix *ngIf="descriptionValue" (click)="descriptionValue=''">close</mat-icon>
+      </mat-form-field>
+    <!-- </ng-container> -->
   </div>
   <div class="col-1">
     <mat-icon matSuffix (click)="removeData(i)">close</mat-icon>
+    <mat-icon matSuffix (click)="putData(i,titleValue,descriptionValue,imageValue)">save</mat-icon>
+    <mat-icon matSuffix (click)="edit = i; titleValue=dataPoint.title; descriptionValue=dataPoint.description; imageValue=dataPoint.image">edit</mat-icon>
   </div>
 </div>

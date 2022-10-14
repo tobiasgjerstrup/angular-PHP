@@ -9,19 +9,27 @@ import { Component, OnInit } from '@angular/core';
 export class ItemListComponent implements OnInit {
   url = 'http://192.168.8.117/';
   value = '';
+  edit = -1;
+  titleValue = '';
+  descriptionValue = '';
+  imageValue = '';
   public data: any = [];
   constructor(private http: HttpClient) {
   }
   getData(){
     this.http.get(this.url+'?ID=JSON').subscribe((res)=>{
       this.data = res;
+      console.log(this.data);
     })
   } 
   ngOnInit(): void {
     this.getData();
   }
-  putData(){
-    this.http.put(this.url+'?ID=PUT', this.value).subscribe((res)=>{
+  putData(i: any, title: any, description: any, image: any){
+    this.edit = -1;
+    const data = i+","+title+","+description+","+image;
+    console.log(data);
+    this.http.put(this.url+'?ID=PUT', data).subscribe((res)=>{
       this.getData();
     })
   }
