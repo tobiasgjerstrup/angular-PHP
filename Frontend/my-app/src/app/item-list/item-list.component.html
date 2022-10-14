@@ -1,6 +1,23 @@
 <mat-form-field class="example-form-field" appearance="fill">
   <mat-label>Clearable input</mat-label>
-  <input matInput type="text" [(ngModel)]="value" (keyup.enter)="putData()">
-  <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-  </button>
+  <input matInput type="text" [(ngModel)]="value" (keyup.enter)="createData(value)">
+    <mat-icon matSuffix *ngIf="value" (click)="value=''">close</mat-icon>
 </mat-form-field>
+
+<div style="text-align: center">
+  <h1>Welcome!</h1>
+  <button (click)="getData()">Fetch Data</button>
+  <mat-icon matSuffix (click)="createData(value)">close</mat-icon>
+</div>
+<div *ngFor="let dataPoint of data.data; let i = index" class="row content">
+  <div class="col-6">
+    <p>{{ dataPoint.title }}</p>
+    <img style="height: 32px; width: 32px;"src={{dataPoint.image}} alt="test">
+  </div>
+  <div class="col-5">
+    <p *ngFor="let description of dataPoint.description">{{ description }}</p>
+  </div>
+  <div class="col-1">
+    <mat-icon matSuffix (click)="removeData(i)">close</mat-icon>
+  </div>
+</div>
