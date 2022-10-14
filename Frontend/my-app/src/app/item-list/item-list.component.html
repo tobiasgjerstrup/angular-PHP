@@ -13,12 +13,12 @@
     <p *ngIf="edit !== i">{{ dataPoint.title }}</p>
     <mat-form-field *ngIf="edit === i" class="example-form-field" appearance="fill">
       <mat-label>Title</mat-label>
-      <input matInput type="text" [(ngModel)]="titleValue">
+      <input matInput type="text" [(ngModel)]="titleValue" (keyup.enter)="putData(i,titleValue,descriptionValue,imageValue)">
       <mat-icon matSuffix *ngIf="titleValue" (click)="titleValue=''">close</mat-icon>
     </mat-form-field>
     <mat-form-field *ngIf="edit === i" class="example-form-field" appearance="fill">
       <mat-label>Title</mat-label>
-      <input matInput type="text" [(ngModel)]="imageValue">
+      <input matInput type="text" [(ngModel)]="imageValue" (keyup.enter)="putData(i,titleValue,descriptionValue,imageValue)">
       <mat-icon matSuffix *ngIf="imageValue" (click)="imageValue=''">close</mat-icon>
     </mat-form-field>
     <img *ngIf="edit !== i" style="height: 32px; width: 32px;" src={{url}}{{dataPoint.image}} alt="test">
@@ -28,7 +28,7 @@
       <p *ngIf="edit !== i" style="white-space: pre-line;">{{ dataPoint.description }}</p>
       <mat-form-field *ngIf="edit === i" class="example-form-field" appearance="fill">
         <mat-label>description</mat-label>
-        <textarea matInput type="text" [(ngModel)]="descriptionValue"></textarea>
+        <textarea matInput type="text" [(ngModel)]="descriptionValue" (keyup.enter)="putData(i,titleValue,descriptionValue,imageValue)"></textarea>
         <mat-icon matSuffix *ngIf="descriptionValue" (click)="descriptionValue=''">close</mat-icon>
       </mat-form-field>
     <!-- </ng-container> -->
