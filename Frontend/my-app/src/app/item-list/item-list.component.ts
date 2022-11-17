@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./item-list.component.scss']
 })
 export class ItemListComponent implements OnInit {
-  url = 'http://192.168.8.117/';
+  url = 'localhost:8000/';
   value = '';
   edit = -1;
   titleValue = '';
